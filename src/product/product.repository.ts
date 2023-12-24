@@ -16,6 +16,16 @@ const findProductById = async (id: string) => {
     return product
 }
 
+const findProductByUserId = async (userId: string) => {
+    const product = await prisma.product.findFirst({
+        where: {
+            userId
+        }
+    })
+
+    return product
+}
+
 const insertProduct = async (productData: any, userId: string) => {
     try {
         const product = await prisma.product.create({
@@ -35,4 +45,4 @@ const insertProduct = async (productData: any, userId: string) => {
     }
 };
 
-export {findProducts, findProductById, insertProduct}
+export {findProducts, findProductById, findProductByUserId, insertProduct}

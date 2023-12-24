@@ -1,6 +1,6 @@
 import express, {Request, Response} from "express"
 import { ValidationRequest, accessValidation } from "../auth/auth.middleware";
-import { createProduct, getProductById, getProducts } from "./product.service";
+import { createProduct, getProductById, getProductByUserId, getProducts } from "./product.service";
 import { prisma } from "../db";
 
 const router = express.Router()
@@ -40,6 +40,8 @@ router.post("/createProduct", accessValidation, async (req: Request, res: Respon
         });
     }
 });
+
+
 
 
 router.put("/updateProduct/:productId", accessValidation, async (req: Request, res: Response) => {
@@ -84,6 +86,17 @@ router.put("/updateProduct/:productId", accessValidation, async (req: Request, r
         return res.status(500).json({
             message: error.message
         });
+    }
+});
+
+router.get("/getProductByUserId/:userId", async (req: Request, res: Response) => {
+    const userId = req.params.userId;
+    
+    try {
+        const products = await getProductByUserId(userId);
+        return res.status(200).json(products);
+    } catch (error: any) {
+        return res.status(404).json({ error: error.message });
     }
 });
 

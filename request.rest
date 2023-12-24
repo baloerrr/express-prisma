@@ -31,6 +31,9 @@ GET http://localhost:8000/product/getProducts
 GET http://localhost:8000/product/getProductById/2
 
 ###
+GET http://localhost:8000/product/getProductByUserId/4423db4e-c47f-4591-810c-aa6857503406
+
+###
 POST http://localhost:8000/product/createProduct
 Content-Type: application/json
 
